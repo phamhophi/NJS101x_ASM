@@ -1,0 +1,22 @@
+{
+  "name": "njs101x_assignment1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phamhophi/NJS101x_ASM.git"
+  },
+  "author": "Pham Ho Phi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phamhophi/NJS101x_ASM/issues"
+  },
+  "homepage": "https://github.com/phamhophi/NJS101x_ASM#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
