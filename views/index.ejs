@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+  <header class="main-header">
+    <nav class="main-header__nav">
+      <ul class="main-header__item-list">
+        <li class="main-header__item"><a href="/">Điểm Danh</a></li>
+        <li class="main-header__item"><a href="/">Thông tin cá nhân</a></li>
+        <li class="main-header__item"><a href="/">Tra cứu thông tin</a></li>
+        <li class="main-header__item"><a href="/">Thông tin Covid</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <form action="/" method="post">
+      <div>
+        <label for="username">Tên đăng nhập</label>
+        <input type="text">
+      </div>
+      <div>
+        <label for="password">Mật khẩu</label>
+        <input type="password">
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+</body>
+
+</html>

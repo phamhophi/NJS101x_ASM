@@ -13,23 +13,24 @@
     <div>Navigation</div>
   </header>
   <main>
-    <form action="/index" method="post">
+    <form class="check-form" action="/" method="post">
       <div>
         <h1>Thông tin check in/out</h1>
       </div>
       <div>
         <label for="name">Tên nhân viên</label>
-        <input type="text">
+        <input type="text" value="Phạm Phi" disabled>
       </div>
       <div>
         <label for="workplace">Nơi làm việc</label>
         <select name="workplace" id="workplace">
-          <option value="">Chọn nơi làm việc</option>
+          <option value="">Nơi làm việc</option>
           <option value="home">Nhà</option>
           <option value="company">Công Ty</option>
           <option value="customer">Khách Hàng</option>
         </select>
       </div>
+      <button type="submit">Submit</button>
     </form>
   </main>
 </body>
