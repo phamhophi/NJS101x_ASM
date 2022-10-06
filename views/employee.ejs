@@ -1,0 +1,44 @@
+<%- include('./includes/head.ejs') %>
+<link rel="stylesheet" href="./css/form.css">
+</head>
+
+<body>
+  <%- include('./includes/navigation.ejs') %>
+  <main>
+    <form class="g-form" action="/" method="post">
+      <div class="form-control">
+        <label for="id">ID</label>
+        <input type="text" value="" disabled>
+      </div>
+      <div class="form-control">
+        <label for="name">Tên nhân viên</label>
+        <input type="text" value="" disabled>
+      </div>
+      <div class="form-control">
+        <label for="dob">Ngày Sinh</label>
+        <input type="text" value="" disabled>
+      </div>
+      <div class="form-control">
+        <label for="salaryscale">Thang lương</label>
+        <input type="text" value="" disabled>
+      </div>
+      <div class="form-control">
+        <label for="startdate">Ngày bắt đầu</label>
+        <input type="text" value="" disabled>
+      </div>
+      <div class="form-control">
+        <label for="department">Phòng ban</label>
+        <input type="text" value="" disabled>
+      </div>
+      <div class="form-control">
+        <label for="annualleave">Ngày phép</label>
+        <input type="text" value="" disabled>
+      </div>
+      <div class="form-control">
+        <label for="image">Hình ảnh</label>
+        <input type="text" value="">
+      </div>
+      <button class="btn" type="submit">Submit</button>
+    </form>
+  </main>
+  <%- include('./includes/end.ejs') %>
