@@ -11,7 +11,8 @@
     <form class="g-form" action="/absent" method="post">
       <div class="form-control">
         <label for="dateRemain">Ngày nghỉ còn lại</label>
-        <input type="number" name="dateRemain" id="dateRemain" step="0.01" value="<%= user.annualLeave %>" disabled>
+        <input type="number" name="dateRemain" id="dateRemain" step="0.01" value="<%= user.annualLeave.toFixed(1) %>"
+          disabled>
       </div>
       <div class="form-control">
         <label for="dateLeave">Ngày nghỉ</label>
