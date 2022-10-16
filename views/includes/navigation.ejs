@@ -1,10 +1,20 @@
 <header class="main-header">
   <nav class="main-header__nav">
     <ul class="main-header__item-list">
-      <li class="main-header__item"><a href="/">Điểm Danh</a></li>
-      <li class="main-header__item"><a href="/">Thông tin cá nhân</a></li>
-      <li class="main-header__item"><a href="/">Tra cứu thông tin</a></li>
-      <li class="main-header__item"><a href="/">Thông tin Covid</a></li>
+      <li class="main-header__item"><a class="<%= path === '/' ? 'active' : '' %>" href="/">Trang
+          chủ</a></li>
+      <li class="main-header__item"><a class="<%= path === '/absent' || path === '/absent-detail' ? 'active' : '' %>"
+          href="/absent">Nghỉ phép</a></li>
+      <li class="main-header__item"><a class="<%= path === '/user' || path === '/edit-user' ? 'active' : '' %>"
+          href="/user">Thông tin cá
+          nhân</a></li>
+      <li class="main-header__item"><a class="<%= path === '/search' ? 'active' : '' %>" href="/search">Tra cứu thông
+          tin</a></li>
+      <li class="main-header__item"><a class="<%= path === '/covid' || path === '/covid-detail' ? 'active' : '' %>"
+          href="/covid">Thông tin
+          Covid</a></li>
     </ul>
+
+    <div id="menu-btn" class="fa-solid fa-bars"></div>
   </nav>
 </header>

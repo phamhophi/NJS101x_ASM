@@ -1,0 +1,52 @@
+<%- include('./includes/head.ejs') %>
+<link rel="stylesheet" href="./css/form.css">
+</head>
+
+<body>
+  <%- include('./includes/navigation.ejs') %>
+  <main>
+    <% if(user.annualLeave > 0){ %>
+    <h1 class="centered">Đăng ký thông tin nghỉ phép</h1>
+    <h3 class="centered"><a href="/absent-detail">Xem chi tiết nghỉ phép</a></h3>
+    <form class="g-form" action="/absent" method="post">
+      <div class="form-control">
+        <label for="dateRemain">Ngày nghỉ còn lại</label>
+        <input type="number" name="dateRemain" id="dateRemain" step="0.01" value="<%= user.annualLeave %>" disabled>
+      </div>
+      <div class="form-control">
+        <label for="dateLeave">Ngày nghỉ</label>
+        <input type="date" name="dateLeave" id="dateLeave">
+      </div>
+      <div class="form-control">
+        <label for="reasonLeave">Lý do</label>
+        <textarea name="reasonLeave" id="reasonLeave" cols="40" rows="10"></textarea>
+      </div>
+      <div class="form-control">
+        <label for="leaveHours">Số giờ nghỉ</label>
+        <input type="number" name="leaveHours" id="leaveHours" max="8" min="1">
+      </div>
+      <div class="form-control">
+        <label for="days">Ngày phép nghỉ</label>
+        <input type="number" name="days" id="days" step="0.01" readonly>
+      </div>
+      <button class="btn" type="submit">Đăng ký</button>
+    </form>
+    <% }else{ %>
+    <h2>Ngày phép năm của bạn đã hết</h2>
+    <% } %>
+  </main>
+  <script>
+    let leaveHours = document.getElementById('leaveHours');
+    let days = document.getElementById('days');
+
+    leaveHours.addEventListener('input', function () {
+      if (leaveHours.value) {
+        const day = (leaveHours.value / 8).toFixed(1)
+        console.log(day)
+        days.value = day;
+      } else {
+        days.value = ''
+      }
+    });
+  </script>
+  <%- include('./includes/end.ejs') %>

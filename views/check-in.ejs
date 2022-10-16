@@ -5,7 +5,7 @@
 <body>
   <%- include('./includes/navigation.ejs') %>
   <main>
-    <form class="g-form" action="/checkin" method="post">
+    <form class="g-form" action="/check-in" method="post">
       <div class="form-control">
         <label for="name">Tên nhân viên</label>
         <input type="text" value="Phạm Phi" disabled>
@@ -23,11 +23,11 @@
       <% }else{ %>
       <div class="form-control">
         <label for="workplace">Nơi làm việc</label>
-        <input type="text" name="workplace" id="workplace" value="<%= workPlace %> " disabled>
+        <input type="text" name="workplace" id="workplace" value="<%= workPlace %>" readonly>
       </div>
       <div class="form-control">
         <label for="starttime">Thời gian bắt đầu</label>
-        <input type="text" name="starttime" id="starttime" value="<%= startTime %> " disabled>
+        <input type="time" name="starttime" id="starttime" value="<%= startTime %>" readonly>
       </div>
       <% } %>
     </form>

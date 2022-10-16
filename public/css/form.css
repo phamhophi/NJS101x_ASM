@@ -9,8 +9,13 @@
   margin: 1rem 0;
 }
 
+.form-control label {
+  font-weight: bolder;
+}
+
 .form-control label,
-.form-control input {
+.form-control input,
+.form-control select {
   display: block;
   width: 100%;
   margin-bottom: 0.25rem;
@@ -24,5 +29,5 @@
 }
 
 .form-control input:focus {
-  outline-color: #00695c;
+  outline-color: #339966;
 }

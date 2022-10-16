@@ -1,0 +1,28 @@
+<%- include('./includes/head.ejs') %>
+<link rel="stylesheet" href="./css/form.css">
+</head>
+
+<body>
+  <%- include('./includes/navigation.ejs') %>
+  <main>
+    <form class="g-form" action="/leave" method="post">
+      <div class="form-control">
+        <label for="dateLeave">Ngày nghỉ</label>
+        <input type="date" name="dateLeave" id="dateLeave">
+      </div>
+      <div class="form-control">
+        <label for="reasonLeave">Lý do</label>
+        <textarea name="reasonLeave" id="reasonLeave" cols="50" rows="10"></textarea>
+      </div>
+      <div class="form-control">
+        <label for="dateRemain">Ngày nghỉ còn lại</label>
+        <input type="text" name="dateRemain" id="dateRemain" disabled>
+      </div>
+      <div class="form-control">
+        <label for="leaveHours">Số giờ nghỉ phép</label>
+        <input type="text" name="leaveHours" id="leaveHours">
+      </div>
+      <button class="btn" type="submit">Đăng ký</button>
+    </form>
+  </main>
+  <%- include('./includes/end.ejs') %>
