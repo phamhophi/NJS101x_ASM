@@ -63,7 +63,7 @@ exports.postEditUser = (req, res, next) => {
 
 // Tạo phương thức để hiển thị ra trạng thái nhân viên có đang làm việc không
 exports.getStatus = (req, res, next) => {
-  User.findById("63453c9dae3557123f30515e")
+  User.findById("634d021ca0deb030939a0fc8")
     .then((user) => {
       req.user = user;
       return Status.findOne({ userId: user._id });
@@ -114,10 +114,12 @@ exports.getStatisticSearch = function (req, res, next) {
       let currStatistic = [],
         attendStatistic = [],
         absentStatistic = [];
+
       if (type == "date") {
-        attendStatistic = statistics.filter((item) => {
-          Rollup.checkSearch(search, item.date.toString()) && item.attend;
-        });
+        attendStatistic = statistics.filter(
+          (item) =>
+            Rollup.checkSearch(search, item.date.toString()) && item.attend
+        );
         absentStatistic = statistics.filter(
           (item) =>
             Rollup.checkSearch(search, item.date.toString()) && !item.attend
@@ -148,8 +150,11 @@ exports.getStatisticSearch = function (req, res, next) {
             (sum, item) => sum + item.underTime,
             0
           );
+          currStatistic = [...attendStatistic, ...absentStatistic];
+          currStatistic.overTime = overTime;
+          currStatistic.underTime = underTime;
           if (typeof totalTime === "string") {
-            currStatistic.salary = "Chưa kết thúc";
+            currStatistic.salary = ["Chưa kết thúc"];
           } else {
             currStatistic.salary = (
               req.user.salaryScale * 3000000 +
@@ -158,6 +163,7 @@ exports.getStatisticSearch = function (req, res, next) {
           }
         }
       }
+
       res.render("search", {
         pageTitle: "Tra cứu thông tin",
         user: req.user,

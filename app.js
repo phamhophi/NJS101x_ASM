@@ -34,9 +34,6 @@ app.use((req, res, next) => {
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-// app.use(adminRoutes);
-// app.use(inoutRoutes);
-
 // Kết nối với controller
 app.use(userController.getStatus);
 app.get("/", userController.getHomepage);

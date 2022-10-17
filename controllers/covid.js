@@ -7,7 +7,7 @@ exports.getCovid = (req, res, next) => {
     .then((covid) => {
       if (!covid) {
         const covid = new Covid({
-          userId: userId,
+          userId: req.user._id,
           bodyTemperatures: [],
           vaccine: [],
           positive: [],
@@ -35,7 +35,6 @@ exports.postCovid = (req, res, next) => {
 
   Covid.findOne({ userId: req.user._id })
     .then((covid) => {
-      console.log(covid);
       // Kiểm tra thông tin covid khi bấm đăng ký
       if (type === "temperature") {
         covid.bodyTemperatures.push({

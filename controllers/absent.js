@@ -12,7 +12,7 @@ exports.getAbsent = (req, res, next) => {
 
 // Tạo phương thức update thông tin nghỉ phép
 exports.postAbsent = (req, res, next) => {
-  User.findById("63453c9dae3557123f30515e")
+  User.findById("634d021ca0deb030939a0fc8")
     .then((user) => {
       if (user.annualLeave > 0) {
         const absent = new Absent({
