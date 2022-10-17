@@ -2,6 +2,7 @@
 const Status = require("./status");
 const Rollup = require("./rollup");
 const Absent = require("./absent");
+//
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -76,7 +77,7 @@ userSchema.methods.statusWork = function (type, workplace) {
           })
           .then((status) => {
             status.isWorking = false;
-            status.workplace = "Chưa có";
+            status.workplace = "Chưa xác định";
             return status.save();
           })
           .catch((err) => {

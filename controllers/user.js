@@ -53,7 +53,7 @@ exports.postEditUser = (req, res, next) => {
       return user.save();
     })
     .then((result) => {
-      console.log("Updated success!!");
+      console.log("Cập nhật thành công hình ảnh!!");
       res.redirect("/user");
     })
     .catch((err) => {
@@ -72,7 +72,7 @@ exports.getStatus = (req, res, next) => {
       if (!result) {
         const status = new Status({
           userId: req.user._id,
-          workplace: "Chưa có",
+          workplace: "Chưa xác định",
           isWorking: false,
           attendId: null,
         });
