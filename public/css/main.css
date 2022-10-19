@@ -135,7 +135,7 @@ main {
 
 /*  */
 table {
-  margin: 0;
+  margin: 0px;
   width: 80%;
   border-collapse: collapse;
 }
@@ -152,6 +152,10 @@ tr.total {
 }
 
 @media (max-width: 768px) {
+  .grid {
+    justify-content: flex-start;
+  }
+
   .main-header__item-list {
     list-style: none;
     margin: 0;
