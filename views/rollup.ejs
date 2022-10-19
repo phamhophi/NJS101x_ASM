@@ -1,0 +1,33 @@
+<%- include('./includes/head.ejs') %>
+<link rel="stylesheet" href="./css/form.css">
+</head>
+
+<body>
+  <%- include('./includes/navigation.ejs') %>
+  <main>
+    <h2></h2>
+    <% if(!user.isWorking){ %>
+    <form class="g-form" action="/rollup?type=start" method="post">
+      <h1>Bắt đầu công việc</h1>
+      <div class="form-control">
+        <label for="name">Tên nhân viên</label>
+        <input type="text" value="<%= user.name %> " disabled>
+      </div>
+      <div class="form-control">
+        <label for="workplace">Nơi làm việc</label>
+        <select name="workplace" id="workplace">
+          <option value="Công Ty">Công Ty</option>
+          <option value="Nhà">Nhà</option>
+          <option value="Khách Hàng">Khách Hàng</option>
+        </select>
+      </div>
+      <button class="btn" type="submit">Bắt đầu</button>
+    </form>
+    <% }else{ %>
+    <form class="g-form" action="/rollup?type=end" method="post">
+      <h1>Kết thúc công việc</h1>
+      <button class="btn" type="submit">Kết thúc</button>
+    </form>
+    <% } %>
+  </main>
+  <%- include('./includes/end.ejs') %>

@@ -1,0 +1,33 @@
+.g-form {
+  width: 20rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+}
+
+.form-control {
+  margin: 1rem 0;
+}
+
+.form-control label {
+  font-weight: bolder;
+}
+
+.form-control label,
+.form-control input,
+.form-control select {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+
+.form-control input,
+.form-control select {
+  border: 1px solid #a1a1a1;
+  font: inherit;
+  border-radius: 2px;
+}
+
+.form-control input:focus {
+  outline-color: #339966;
+}

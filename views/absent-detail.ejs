@@ -1,0 +1,33 @@
+<%- include('./includes/head.ejs') %>
+</head>
+
+<body>
+  <%- include('./includes/navigation.ejs') %>
+  <main>
+    <div>
+      <h1 class="centered">Chi tiết nghỉ phép năm</h1>
+      <div class="grid">
+        <table>
+          <thead>
+            <tr>
+              <th>Ngày nghỉ</th>
+              <th>Lý do</th>
+              <th>Số giờ nghỉ</th>
+              <th>Qui đổi ngày</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let abs of absents){ %>
+            <tr>
+              <td><%= abs.date.toLocaleDateString() %></td>
+              <td><%= abs.reason %></td>
+              <td><%= abs.hours %> giờ</td>
+              <td><%= abs.days %> ngày</td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+  <%- include('./includes/end.ejs') %>

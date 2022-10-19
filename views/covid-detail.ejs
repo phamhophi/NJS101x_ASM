@@ -1,0 +1,66 @@
+<%- include('./includes/head.ejs') %>
+<link rel="stylesheet" href="./css/form.css">
+</head>
+
+<body>
+  <%- include('./includes/navigation.ejs') %>
+  <main>
+    <h1 class="centered">Chi tiết đăng ký thông tin covid</h1>
+    <div class="covid-detail__control">
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Ngày đăng ký</th>
+              <th>Nhiệt độ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% covid.bodyTemperatures.forEach(i =>{ %>
+            <tr>
+              <td><%= i.date.toLocaleDateString() %></td>
+              <td><%= i.temperature %><sup>o</sup>C</td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Ngày đăng ký</th>
+              <th>Mũi số</th>
+              <th>Tên vaccine</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% covid.vaccine.forEach((i,index) =>{ %>
+            <tr>
+              <td><%= i.date.toLocaleDateString() %></td>
+              <td><%= index + 1 %></td>
+              <td><%= i.vaccineName %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Ngày phát hiện(dương tính covid)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% covid.positive.forEach(i =>{ %>
+            <tr>
+              <td><%= i.date.toLocaleDateString() %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+  <%- include('./includes/end.ejs') %>
