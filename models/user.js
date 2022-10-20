@@ -35,6 +35,18 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  username: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  rank: {
+    type: String,
+    required: true,
+  },
 });
 
 // Xử lý trang thái khi điểm danh hoặc kết thúc phiên làm việc

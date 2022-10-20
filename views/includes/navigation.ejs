@@ -3,6 +3,7 @@
     <ul class="main-header__item-list">
       <li class="main-header__item"><a class="<%= path === '/' ? 'active' : '' %>" href="/">Trang
           chủ</a></li>
+      <% if(isAuthenticated){ %>
       <li class="main-header__item"><a class="<%= path === '/absent' || path === '/absent-detail' ? 'active' : '' %>"
           href="/absent">Nghỉ phép</a></li>
       <li class="main-header__item"><a class="<%= path === '/user' || path === '/edit-user' ? 'active' : '' %>"
@@ -13,6 +14,12 @@
       <li class="main-header__item"><a class="<%= path === '/covid' || path === '/covid-detail' ? 'active' : '' %>"
           href="/covid">Thông tin
           Covid</a></li>
+      <li class="main-header__item">
+        <form action="/logout" method="post">
+          <button type="submit">Logout</button>
+        </form>
+      </li>
+      <% } %>
     </ul>
 
     <div id="menu-btn" class="fa-solid fa-bars"></div>
