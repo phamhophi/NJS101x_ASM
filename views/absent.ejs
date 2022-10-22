@@ -7,11 +7,11 @@
   <main>
     <% if(user.annualLeave > 0){ %>
     <h1 class="centered">Đăng ký thông tin nghỉ phép</h1>
-    <h3 class="centered"><a href="/absent-detail">Xem chi tiết nghỉ phép</a></h3>
+    <h3 class="centered link-a"><a href="/absent-detail">Xem chi tiết nghỉ phép</a></h3>
     <form class="g-form" action="/absent" method="post">
       <div class="form-control">
         <label for="dateRemain">Ngày nghỉ còn lại</label>
-        <input type="number" name="dateRemain" id="dateRemain" step="0.01" value="<%= user.annualLeave.toFixed(1) %>"
+        <input type="number" name="dateRemain" id="dateRemain" step="0.01" value="<%= user.annualLeave.toFixed(2) %>"
           disabled>
       </div>
       <div class="form-control">
@@ -42,7 +42,7 @@
 
     leaveHours.addEventListener('input', function () {
       if (leaveHours.value) {
-        const day = (leaveHours.value / 8).toFixed(1)
+        const day = (leaveHours.value / 8).toFixed(2)
         console.log(day)
         days.value = day;
       } else {

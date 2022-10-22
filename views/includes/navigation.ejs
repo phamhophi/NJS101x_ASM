@@ -4,16 +4,28 @@
       <li class="main-header__item"><a class="<%= path === '/' ? 'active' : '' %>" href="/">Trang
           chủ</a></li>
       <% if(isAuthenticated){ %>
-      <li class="main-header__item"><a class="<%= path === '/absent' || path === '/absent-detail' ? 'active' : '' %>"
-          href="/absent">Nghỉ phép</a></li>
-      <li class="main-header__item"><a class="<%= path === '/user' || path === '/edit-user' ? 'active' : '' %>"
-          href="/user">Thông tin cá
-          nhân</a></li>
-      <li class="main-header__item"><a class="<%= path === '/search' ? 'active' : '' %>" href="/search">Tra cứu thông
-          tin</a></li>
-      <li class="main-header__item"><a class="<%= path === '/covid' || path === '/covid-detail' ? 'active' : '' %>"
-          href="/covid">Thông tin
-          Covid</a></li>
+      <li class="main-header__item">
+        <a class="<%= path === '/absent' || path === '/absent-detail' ? 'active' : '' %>" href="/absent">Nghỉ phép</a>
+      </li>
+      <% if(user.userPermission.includes("view_profile")){ %>
+      <li class="main-header__item">
+        <a class="<%= path === '/user' || path === '/edit-user' ? 'active' : '' %>" href="/user">Thông tin cá nhân</a>
+      </li>
+      <% } %>
+      <% if(user.userPermission.includes("search")){ %>
+      <li class="main-header__item">
+        <a class="<%= path === '/search' ? 'active' : '' %>" href="/search">Tra cứu thông tin</a>
+      </li>
+      <% } %>
+      <li class="main-header__item">
+        <a class="<%= path === '/covid' || path === '/covid-detail' || path === '/employee' ? 'active' : '' %>"
+          href="/covid">Thông tin Covid</a>
+      </li>
+      <% if(user.userPermission.includes("accept")){ %>
+      <li class="main-header__item">
+        <a class="<%= path === '/accept-time' ? 'active' : '' %>" href="/accept-time">Xác nhận giờ làm</a>
+      </li>
+      <% } %>
       <li class="main-header__item">
         <form action="/logout" method="post">
           <button type="submit">Logout</button>

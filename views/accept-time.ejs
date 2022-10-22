@@ -6,16 +6,8 @@
   <%- include('./includes/navigation.ejs') %>
   <main>
     <div>
-      <h1 class="centered">Thống kê dữ liệu giờ làm</h1>
-
+      <h1 class="centered">Dữ liệu giờ làm của nhân viên</h1>
       <div class="g-form">
-        <div>
-          <% if(user.rank === 'admin'){ %>
-          <span><b>ID: <%= user._id %></b></span>
-          <br>
-          <span><b>Họ Tên: <%= user.name %></b></span>
-          <% } %>
-        </div>
         <form id="wildcard" action="/statistic-search" method="GET">
           <div class="form-control">
             <label for="date">Tìm kiếm theo:</label>
@@ -132,12 +124,6 @@
         </table>
         <%} %>
       </div>
-      <% if(type == 'salary' && statistics.length > 0){ %>
-      <p>Thời gian làm thêm: <%= statistics.overTime.toFixed(2) %> giờ - Thời gian làm thiếu:
-        <%= statistics.underTime.toFixed(2) %> giờ</p>
-      <h3><span>Tiền lương: <%= statistics.salary %></span></h3>
-      <% } %>
     </div>
-    <%- include('./includes/pagination.ejs',{statistics:currentPage, nextPage:nextPage, previousPage:previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
   </main>
   <%- include('./includes/end.ejs') %>

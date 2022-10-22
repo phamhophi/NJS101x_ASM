@@ -5,7 +5,7 @@
 <body>
   <%- include('./includes/navigation.ejs') %>
   <main>
-    <form class="g-form" action="<% if(editing) { %> /edit-user <% }else{ %> /user <% } %> " method="post">
+    <form class="g-form" action="/edit-user" method="post">
       <h1>Chỉnh sửa thông tin cá nhân</h1>
       <div class="form-control">
         <label for="name">Tên nhân viên</label>
@@ -13,7 +13,7 @@
       </div>
       <div class="form-control">
         <label for="_id">ID</label>
-        <input type="text" name="_id" disabled value="<% if (editing) { %><%= user._id %><% } %>">
+        <input type="text" name="_id" disabled value="<%= user._id %>">
       </div>
       <div class="form-control">
         <label for="doB">Ngày Sinh</label>
@@ -24,7 +24,6 @@
         <input type="text" id="salaryScale" name="salaryScale" value="<%= user.salaryScale %>" disabled>
       </div>
       <div class=" form-control">
-        <!-- <% const startDate  = new Date(user.startDate) %> -->
         <label for="startDate">Ngày bắt đầu công việc</label>
         <input type="text" id="startDate" name="startDate" value="<%= user.startDate.toLocaleDateString() %>" disabled>
       </div>
@@ -40,10 +39,8 @@
         <label for="image">Hình ảnh</label>
         <input type="text" id="image" name="image" value="<%= user.image %>">
       </div>
-      <% if(editing) { %>
       <input type="hidden" name="userId" value="<%= user._id %>">
-      <%} %>
-      <button class="btn" type="submit"><%if(editing){ %>Update User<%}else{%>Add User<%}%></button>
+      <button class="btn" type="submit">Update User</button>
     </form>
   </main>
   <%- include('./includes/end.ejs') %>

@@ -47,6 +47,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  userPermission: {
+    type: Array,
+    required: true,
+  },
 });
 
 // Xử lý trang thái khi điểm danh hoặc kết thúc phiên làm việc
@@ -80,7 +84,9 @@ userSchema.methods.statusWork = function (type, workplace) {
             return status.save();
           })
           .catch((err) => {
-            console.log(err);
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
           });
       } else {
         return this.finishAttended(attendedId, new Date())
@@ -93,12 +99,16 @@ userSchema.methods.statusWork = function (type, workplace) {
             return status.save();
           })
           .catch((err) => {
-            console.log(err);
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
           });
       }
     })
     .catch((err) => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
@@ -165,7 +175,11 @@ userSchema.methods.getRollupDetails = function () {
       .then((attend) => {
         return attend;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
   });
 };
 
@@ -200,7 +214,11 @@ userSchema.methods.getSearchInform = function () {
         return searchInform;
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 module.exports = mongoose.model("User", userSchema);

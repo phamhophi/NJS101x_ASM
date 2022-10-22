@@ -1,6 +1,14 @@
 // Tạo phương thức render trang điểm danh
 exports.getRollup = (req, res, next) => {
   const user = req.user;
+  if (!user.userPermission.includes("rollup")) {
+    return res.status(404).render("404", {
+      path: "/404",
+      pageTitle: "Page not found",
+      user: user,
+    });
+  }
+
   res.render("rollup", {
     user: user,
     pageTitle: "Điểm danh",
@@ -23,12 +31,21 @@ exports.postRollup = (req, res, next) => {
       }
     })
     .catch((err) => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
 // Tạo phương thức để render ra trang chi tiết điểm danh
 exports.getRollupDetail = (req, res, next) => {
+  if (!req.session.user.userPermission.includes("rollup")) {
+    return res.status(404).render("404", {
+      path: "/404",
+      pageTitle: "Page not found",
+      user: req.session.user,
+    });
+  }
   req.user.getRollupDetails().then((attend) => {
     if (!attend) {
       res.redirect("/");

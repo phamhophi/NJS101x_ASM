@@ -2,10 +2,21 @@ const User = require("../models/user");
 const Status = require("../models/status");
 const Rollup = require("../models/rollup");
 
+// Giới hạn số dòng hiển thị ở mỗi page
+const ITEMS_PER_PAGE = 2;
+
+// Khởi tạo mảng phân quyền
+const admin_permission = ["accept"];
+const employee_permission = [
+  "edit_profile",
+  "view_profile",
+  "search",
+  "rollup",
+];
+
 // Tạo phương thức để render trang chủ
 exports.getHomepage = (req, res, next) => {
   const user = req.user;
-
   res.render("homepage", {
     pageTitle: "Trang chủ",
     user: user,
@@ -16,6 +27,13 @@ exports.getHomepage = (req, res, next) => {
 // Tạo phương thức để render ra xem/sửa thông tin cá nhân
 exports.getUser = (req, res, next) => {
   const user = req.user;
+  if (!user.userPermission.includes("view_profile")) {
+    return res.status(404).render("404", {
+      path: "/404",
+      pageTitle: "Page not found",
+      user: user,
+    });
+  }
   res.render("user", {
     pageTitle: "Thông tin cá nhân",
     user: user,
@@ -25,21 +43,31 @@ exports.getUser = (req, res, next) => {
 
 // Tạo phương thức để render ra trang sửa thông tin cá nhân
 exports.getEditUser = (req, res, next) => {
-  const editMode = req.query.edit;
-  if (!editMode) {
-    return res.redirect("/");
-  }
   const userId = req.params.userId;
+  // if (!req.session.user) {
+
+  // }
+  if (!req.session.user.userPermission.includes("edit_profile")) {
+    return res.status(404).render("404", {
+      path: "/404",
+      pageTitle: "Page not found",
+      user: req.session.user,
+    });
+  }
+
   User.findById(userId)
     .then((user) => {
       res.render("edit-user", {
         user: user,
         pageTitle: "Thay đổi thông tin cá nhân",
-        editing: editMode,
         path: "/edit-user",
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 // Tạo phương thức để update sau khi sửa thông tin cá nhân
@@ -57,13 +85,15 @@ exports.postEditUser = (req, res, next) => {
       res.redirect("/user");
     })
     .catch((err) => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
 // Tạo phương thức để hiển thị ra trạng thái nhân viên có đang làm việc không
 exports.getStatus = (req, res, next) => {
-  User.findById("634f9aab4451c3804ecab9b9")
+  User.findById(req.session.user._id)
     .then((user) => {
       req.user = user;
       return Status.findOne({ userId: user._id });
@@ -87,19 +117,39 @@ exports.getStatus = (req, res, next) => {
       next();
     })
     .catch((err) => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
 // Tạo phương thức để render ra trang tra cứu thông tin
 exports.getSearch = (req, res, next) => {
+  const page = +req.query.page || 1;
+  let perPage = 5;
+
+  if (!req.session.user.userPermission.includes("search")) {
+    return res.status(404).render("404", {
+      path: "/404",
+      pageTitle: "Page not found",
+      user: req.session.user,
+    });
+  }
+
   req.user.getSearchInform().then((statistics) => {
+    const totalItems = statistics.length;
     res.render("search", {
       pageTitle: "Tra cứu thông tin",
       user: req.user,
-      statistics: statistics,
+      statistics: statistics.slice(perPage * page - perPage, perPage * page),
       type: "details",
       path: "/search",
+      currentPage: page,
+      hasNextPage: perPage * page < totalItems,
+      hasPreviousPage: page > 1,
+      nextPage: page + 1,
+      previousPage: page - 1,
+      lastPage: Math.ceil(totalItems / perPage),
     });
   });
 };
@@ -173,6 +223,8 @@ exports.getStatisticSearch = function (req, res, next) {
       });
     })
     .catch((err) => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };

@@ -12,7 +12,7 @@ exports.getAbsent = (req, res, next) => {
 
 // Tạo phương thức update thông tin nghỉ phép
 exports.postAbsent = (req, res, next) => {
-  User.findById("634f9aab4451c3804ecab9b9")
+  User.findById(req.session.user._id)
     .then((user) => {
       if (user.annualLeave > 0) {
         const absent = new Absent({
@@ -37,12 +37,16 @@ exports.postAbsent = (req, res, next) => {
           });
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 // Tạo phương thức render chi tiết thông tin đã đăng ký nghỉ phép năm
 exports.getAbsentDetail = (req, res, next) => {
-  Absent.find()
+  Absent.find({ userId: req.user._id })
     .then((absent) => {
       res.render("absent-detail", {
         pageTitle: "Chi tiết thông tin nghỉ phép",
@@ -52,6 +56,8 @@ exports.getAbsentDetail = (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };

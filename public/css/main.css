@@ -20,6 +20,18 @@ main {
   margin: auto;
 }
 
+.link-a a {
+  background: transparent;
+  text-decoration: none;
+  color: var(--main-color);
+  cursor: pointer;
+}
+
+.link-a a:hover,
+.link-a a:active {
+  color: #ccffcc;
+}
+
 .centered {
   text-align: center;
 }
@@ -151,6 +163,7 @@ main {
 
 .pagination {
   text-align: center;
+  margin-top: 1rem;
 }
 
 .pagination a {
@@ -158,7 +171,7 @@ main {
   color: var(--main-color);
   padding: 0.5rem;
   border: 1px solid var(--main-color);
-  margin: 0 1rem;
+  margin: 0 0.25rem;
 }
 
 .pagination a:hover,

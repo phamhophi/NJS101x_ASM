@@ -28,8 +28,11 @@ const userController = require("./controllers/user");
 const rollupController = require("./controllers/rollup");
 const covidController = require("./controllers/covid");
 const errorController = require("./controllers/404");
+const errorsController = require("./controllers/500");
 const absentController = require("./controllers/absent");
 const authController = require("./controllers/auth");
+const employeeController = require("./controllers/employee");
+const acceptController = require("./controllers/accept");
 
 // Lấy dữ liệu nhập vào thông qua req.body
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -68,7 +71,9 @@ app.use((req, res, next) => {
       req.user = user;
       next();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      throw new Error(err);
+    });
 });
 
 // Khai báo để sử dụng template engine ejs
@@ -93,7 +98,7 @@ app.post(
 );
 app.post("/logout", authController.postLogout);
 
-app.use(userController.getStatus);
+app.use(isAuth, userController.getStatus);
 app.get("/", isAuth, userController.getHomepage);
 app.get("/user", isAuth, userController.getUser);
 app.get("/edit-user/:userId", isAuth, userController.getEditUser);
@@ -109,31 +114,45 @@ app.post("/absent", absentController.postAbsent);
 app.get("/absent-detail", isAuth, absentController.getAbsentDetail);
 app.get("/search", isAuth, userController.getSearch);
 app.get("/statistic-search", isAuth, userController.getStatisticSearch);
+app.get("/employee", isAuth, employeeController.getEmployee);
+app.get("/covid-detail/:userId", isAuth, employeeController.getEmployeeDetail);
+app.get("/employee/:userId", isAuth, employeeController.getOutCovid);
+app.get("/accept-time", isAuth, acceptController.getAcceptTime);
+
 app.use(errorController.get404);
+app.get("/500", errorsController.get500);
+
+// //
+// app.use((error, req, res, next) => {
+//   res.status(500).render("500", {
+//     pageTitle: "Error!",
+//     path: "/500",
+//     isAuthenticated: req.session.isLoggedIn,
+//   });
+// });
+// const user = new User({
+//   name: "Phạm Hồ Phi",
+//   doB: new Date("1994-12-06"),
+//   salaryScale: 2,
+//   startDate: new Date("2022-10-10"),
+//   department: "Phòng sách",
+//   annualLeave: 10,
+//   image:
+//     "https://i.pinimg.com/564x/8c/87/2e/8c872e6cc9d6c17541bb1b867c62ea61.jpg",
+//   username: "phipham@test.com",
+//   password: "123456",
+//   rank: "Nhân viên",
+//   userPermission: ["edit_profile"],
+// });
+// user.save();
 
 // Khởi tạo kết nối với mongoDB qua mongoose
 mongoose
   .connect(MONGODB_URI)
-  .then(() => {
-    User.findOne().then((user) => {
-      if (!user) {
-        const user = new User({
-          name: "Phạm Hồ Phi",
-          doB: new Date("1994-12-06"),
-          salaryScale: 2,
-          startDate: new Date("2022-10-10"),
-          department: "Phòng sách",
-          annualLeave: 10,
-          image:
-            "https://i.pinimg.com/564x/8c/87/2e/8c872e6cc9d6c17541bb1b867c62ea61.jpg",
-          username: "phipham@test.com",
-          password: "123456",
-          rank: "Nhân viên",
-        });
-        user.save();
-      }
+  .then((result) => {
+    app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
+      console.log("Sever is running!!");
     });
-    app.listen(3000);
   })
   .catch((err) => {
     console.log(err);

@@ -29,7 +29,9 @@
     <div class="grid">
       <ul class="main-page__item-list">
         <% if(!user.isWorking){ %>
+        <% if(user.userPermission.includes("rollup")){ %>
         <li class="btn main-page__item"><a href="/rollup">Điểm Danh</a></li>
+        <% } %>
         <% }else{ %>
         <li class="btn main-page__item"><a href="/rollup?type=end">Kết thúc làm</a></li>
         <% } %>
