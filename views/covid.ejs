@@ -6,10 +6,13 @@
   <%- include('./includes/navigation.ejs') %>
   <main>
     <h1 class="centered">Thông tin covid cá nhân</h1>
-    <h3 class="centered link-a"><a href="/covid-detail">Xem thông tin đã đăng ký</a></h3>
-    <% if(user.userPermission.includes("view_employee")){ %>
-    <h3 class="centered link-a"><a href="/employee">Danh sách nhân viên</a></h3>
-    <% } %>
+    <h3 class="centered link-a">
+      <a class="btn" href="/covid-detail">Thông tin đăng ký</a>
+      <% if(user.userPermission.includes("view_employee")){ %>
+      <a class="btn" href="/employee">Nhân viên</a>
+      <a class="btn" href="/covid/<%= user._id %>?name=<%= user.name %>" target="_blank">PDF</a>
+      <% } %>
+    </h3>
     <div class="g-form">
       <form action="/covid?type=temperature" method="post">
         <h3>Thông tin thân nhiệt</h3>

@@ -11,8 +11,7 @@
     <form class="g-form" action="/absent" method="post">
       <div class="form-control">
         <label for="dateRemain">Ngày nghỉ còn lại</label>
-        <input type="number" name="dateRemain" id="dateRemain" step="0.01" value="<%= user.annualLeave.toFixed(2) %>"
-          disabled>
+        <input type="number" name="dateRemain" id="dateRemain" step="0.01" value="<%= user.annualLeave %>" disabled>
       </div>
       <div class="form-control">
         <label for="dateLeave">Ngày nghỉ</label>
@@ -42,8 +41,8 @@
 
     leaveHours.addEventListener('input', function () {
       if (leaveHours.value) {
-        const day = (leaveHours.value / 8).toFixed(2)
-        console.log(day)
+
+        const day = ((leaveHours.value % 2 === 0) ? (leaveHours.value / 8).toFixed(2) : (leaveHours.value / 8).toFixed(3));
         days.value = day;
       } else {
         days.value = ''

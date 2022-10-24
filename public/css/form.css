@@ -5,6 +5,13 @@
   display: block;
 }
 
+.apt-form {
+  width: 13rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+}
+
 .form-control {
   margin: 1rem 0;
 }
@@ -38,4 +45,13 @@
 .form-control input.invalid,
 .form-control textarea.invalid {
   border-color: red;
+}
+
+.btn-disable {
+  cursor: not-allowed;
+  pointer-events: none;
+
+  /*Button disabled - CSS color class*/
+  color: #c0c0c0;
+  background-color: #c0c0c0;
 }

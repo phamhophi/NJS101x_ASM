@@ -1,5 +1,5 @@
 <%- include('./includes/head.ejs') %>
-<link rel="stylesheet" href="./css/form.css">
+<link rel="stylesheet" href="../css/form.css">
 </head>
 
 <body>
@@ -10,11 +10,9 @@
 
       <div class="g-form">
         <div>
-          <% if(user.rank === 'admin'){ %>
-          <span><b>ID: <%= user._id %></b></span>
+          <span><b>ID: <%= adminId %></b></span>
           <br>
-          <span><b>Họ Tên: <%= user.name %></b></span>
-          <% } %>
+          <span><b>Họ Tên: <%= adminName %></b></span>
         </div>
         <form id="wildcard" action="/statistic-search" method="GET">
           <div class="form-control">

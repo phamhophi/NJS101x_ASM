@@ -1,6 +1,7 @@
 // Tạo phương thức render trang điểm danh
 exports.getRollup = (req, res, next) => {
   const user = req.user;
+  // Giới hạn phân quyền
   if (!user.userPermission.includes("rollup")) {
     return res.status(404).render("404", {
       path: "/404",
@@ -39,6 +40,7 @@ exports.postRollup = (req, res, next) => {
 
 // Tạo phương thức để render ra trang chi tiết điểm danh
 exports.getRollupDetail = (req, res, next) => {
+  // Giới hạn quyền truy cập
   if (!req.session.user.userPermission.includes("rollup")) {
     return res.status(404).render("404", {
       path: "/404",

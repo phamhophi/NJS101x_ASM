@@ -24,8 +24,7 @@
               <td><%= user.department %></td>
               <td><%= user.startDate.toLocaleDateString() %></td>
               <td>
-                <a class="btn" href="/covid-detail/<%= user._id %>">Xem</a>
-                <a class="btn" href="/employee/<%= user._id %>?name=<%= user.name %>" target="_blank">PDF</a>
+                <a class="btn" href="/accept-detail/<%= user._id %>">Xem</a>
               </td>
             </tr>
             <% } %>

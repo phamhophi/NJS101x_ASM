@@ -23,12 +23,13 @@
       </li>
       <% if(user.userPermission.includes("accept")){ %>
       <li class="main-header__item">
-        <a class="<%= path === '/accept-time' ? 'active' : '' %>" href="/accept-time">Xác nhận giờ làm</a>
+        <a class="<%= path === '/accept' || path === '/accept-detail' ? 'active' : '' %>" href="/accept">Xác nhận giờ
+          làm</a>
       </li>
       <% } %>
       <li class="main-header__item">
         <form action="/logout" method="post">
-          <button type="submit">Logout</button>
+          <button type="submit">Đăng Xuất</button>
         </form>
       </li>
       <% } %>

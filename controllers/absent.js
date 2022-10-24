@@ -27,7 +27,7 @@ exports.postAbsent = (req, res, next) => {
           .save()
           .then((absent) => {
             // Update lại ngày phép năm sau khi đăng ký nghỉ
-            const updatedLeave = (user.annualLeave - req.body.days).toFixed(1);
+            const updatedLeave = (user.annualLeave - req.body.days).toFixed(3);
             user.annualLeave = updatedLeave;
             user.save();
           })

@@ -102,57 +102,48 @@ app.use(isAuth, userController.getStatus);
 app.get("/", isAuth, userController.getHomepage);
 app.get("/user", isAuth, userController.getUser);
 app.get("/edit-user/:userId", isAuth, userController.getEditUser);
-app.post("/edit-user", isAuth, userController.postEditUser);
+app.post("/edit-user", userController.postEditUser);
 app.get("/rollup", isAuth, rollupController.getRollup);
-app.post("/rollup", isAuth, rollupController.postRollup);
+app.post("/rollup", rollupController.postRollup);
 app.get("/rollup-detail", isAuth, rollupController.getRollupDetail);
 app.get("/covid", isAuth, covidController.getCovid);
-app.post("/covid", isAuth, covidController.postCovid);
+app.post("/covid", covidController.postCovid);
 app.get("/covid-detail", isAuth, covidController.getCovidDetail);
 app.get("/absent", isAuth, absentController.getAbsent);
 app.post("/absent", absentController.postAbsent);
 app.get("/absent-detail", isAuth, absentController.getAbsentDetail);
 app.get("/search", isAuth, userController.getSearch);
 app.get("/statistic-search", isAuth, userController.getStatisticSearch);
-app.get("/employee", isAuth, employeeController.getEmployee);
 app.get("/covid-detail/:userId", isAuth, employeeController.getEmployeeDetail);
+app.get("/covid/:userId", isAuth, covidController.getOutPDFCovid);
+app.get("/employee", isAuth, employeeController.getEmployee);
 app.get("/employee/:userId", isAuth, employeeController.getOutCovid);
-app.get("/accept-time", isAuth, acceptController.getAcceptTime);
+app.get("/accept", isAuth, acceptController.getAcceptTime);
+app.post("/accept-detail", acceptController.postAccept);
+app.get("/accept-detail/:userId", isAuth, acceptController.getAcceptDetail);
+app.get("/statistic-month", isAuth, acceptController.getStatisticMonth);
+app.post("/accept-delete", acceptController.postDeleteTime);
 
 app.use(errorController.get404);
 app.get("/500", errorsController.get500);
 
-// //
 // app.use((error, req, res, next) => {
 //   res.status(500).render("500", {
 //     pageTitle: "Error!",
 //     path: "/500",
+//     user: req.session.user,
 //     isAuthenticated: req.session.isLoggedIn,
 //   });
 // });
-// const user = new User({
-//   name: "Phạm Hồ Phi",
-//   doB: new Date("1994-12-06"),
-//   salaryScale: 2,
-//   startDate: new Date("2022-10-10"),
-//   department: "Phòng sách",
-//   annualLeave: 10,
-//   image:
-//     "https://i.pinimg.com/564x/8c/87/2e/8c872e6cc9d6c17541bb1b867c62ea61.jpg",
-//   username: "phipham@test.com",
-//   password: "123456",
-//   rank: "Nhân viên",
-//   userPermission: ["edit_profile"],
-// });
-// user.save();
 
 // Khởi tạo kết nối với mongoDB qua mongoose
 mongoose
   .connect(MONGODB_URI)
   .then((result) => {
-    app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
-      console.log("Sever is running!!");
-    });
+    // app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
+    //   console.log("Sever is running!!");
+    // });
+    app.listen(3000);
   })
   .catch((err) => {
     console.log(err);

@@ -2,17 +2,8 @@ const User = require("../models/user");
 const Status = require("../models/status");
 const Rollup = require("../models/rollup");
 
-// Giới hạn số dòng hiển thị ở mỗi page
-const ITEMS_PER_PAGE = 2;
-
-// Khởi tạo mảng phân quyền
-const admin_permission = ["accept"];
-const employee_permission = [
-  "edit_profile",
-  "view_profile",
-  "search",
-  "rollup",
-];
+// Tổng hiển thị trên 1 trang
+let perPage = 3;
 
 // Tạo phương thức để render trang chủ
 exports.getHomepage = (req, res, next) => {
@@ -44,9 +35,7 @@ exports.getUser = (req, res, next) => {
 // Tạo phương thức để render ra trang sửa thông tin cá nhân
 exports.getEditUser = (req, res, next) => {
   const userId = req.params.userId;
-  // if (!req.session.user) {
-
-  // }
+  // // Giới hạn quyền truy cập
   if (!req.session.user.userPermission.includes("edit_profile")) {
     return res.status(404).render("404", {
       path: "/404",
@@ -126,8 +115,9 @@ exports.getStatus = (req, res, next) => {
 // Tạo phương thức để render ra trang tra cứu thông tin
 exports.getSearch = (req, res, next) => {
   const page = +req.query.page || 1;
-  let perPage = 5;
+  let adminId, adminName;
 
+  // Giới hạn quyền truy cập
   if (!req.session.user.userPermission.includes("search")) {
     return res.status(404).render("404", {
       path: "/404",
@@ -135,6 +125,14 @@ exports.getSearch = (req, res, next) => {
       user: req.session.user,
     });
   }
+
+  // Lấy thông quản lý
+  User.findOne({ department: req.session.user.department, rank: "admin" }).then(
+    (admin) => {
+      adminId = admin._id;
+      adminName = admin.name;
+    }
+  );
 
   req.user.getSearchInform().then((statistics) => {
     const totalItems = statistics.length;
@@ -144,6 +142,8 @@ exports.getSearch = (req, res, next) => {
       statistics: statistics.slice(perPage * page - perPage, perPage * page),
       type: "details",
       path: "/search",
+      adminId: adminId,
+      adminName: adminName,
       currentPage: page,
       hasNextPage: perPage * page < totalItems,
       hasPreviousPage: page > 1,
@@ -158,6 +158,16 @@ exports.getSearch = (req, res, next) => {
 // nội dung trang sau khi ấn nút tra cứu thông tin
 exports.getStatisticSearch = function (req, res, next) {
   const { type, search } = req.query;
+  const page = +req.query.page || 1;
+  let adminId, adminName;
+
+  // Lấy thông quản lý
+  User.findOne({ department: req.session.user.department, rank: "admin" }).then(
+    (admin) => {
+      adminId = admin._id;
+      adminName = admin.name;
+    }
+  );
   req.user
     .getSearchInform()
     .then((statistics) => {
@@ -213,13 +223,24 @@ exports.getStatisticSearch = function (req, res, next) {
           }
         }
       }
-
+      const totalItems = currStatistic.length;
       res.render("search", {
         pageTitle: "Tra cứu thông tin",
         user: req.user,
-        statistics: currStatistic,
+        statistics: currStatistic.slice(
+          perPage * page - perPage,
+          perPage * page
+        ),
         type: "salary",
         path: "/search",
+        adminId: adminId,
+        adminName: adminName,
+        currentPage: page,
+        hasNextPage: perPage * page < totalItems,
+        hasPreviousPage: page > 1,
+        nextPage: page + 1,
+        previousPage: page - 1,
+        lastPage: Math.ceil(totalItems / perPage),
       });
     })
     .catch((err) => {

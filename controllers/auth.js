@@ -58,6 +58,8 @@ exports.postLogin = (req, res, next) => {
       if (password === user.password) {
         req.session.isLoggedIn = true;
         req.session.user = user;
+        // Khỏi tạo giá trị
+        req.session.accept = [];
         return req.session.save((err) => {
           console.log(err);
           res.redirect("/");

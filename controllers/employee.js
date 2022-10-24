@@ -7,6 +7,7 @@ const PDFDocument = require("pdfkit");
 
 // Tạo phương thức render thông tin nhân viên được quản lý
 exports.getEmployee = (req, res, next) => {
+  // Giới hạn quyền truy cập
   if (!req.session.user.userPermission.includes("view_employee")) {
     return res.status(404).render("404", {
       path: "/404",
@@ -17,7 +18,6 @@ exports.getEmployee = (req, res, next) => {
 
   User.find({ department: req.session.user.department, rank: "employee" })
     .then((user) => {
-      console.log(user);
       res.render("employee", {
         path: "/employee",
         pageTitle: "Thông tin nhân viên quản lý",
@@ -35,6 +35,14 @@ exports.getEmployee = (req, res, next) => {
 // Tạo phương thức render khi xem thông tin nhân viên đang quản lý
 exports.getEmployeeDetail = (req, res, next) => {
   const userId = req.params.userId;
+  // Giới hạn quyền truy cập
+  if (!req.session.user.userPermission.includes("view_employee")) {
+    return res.status(404).render("404", {
+      path: "/404",
+      pageTitle: "Page not found",
+      user: req.session.user,
+    });
+  }
 
   Covid.findOne({ userId: req.params.userId })
     .then((covid) => {

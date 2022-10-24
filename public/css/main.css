@@ -112,6 +112,23 @@ main {
   color: var(--white);
 }
 
+.btn:hover,
+.btn:active {
+  background-color: var(--main-color);
+  color: var(--white);
+}
+
+.btn.danger {
+  color: red;
+  border-color: red;
+}
+
+.btn.danger:hover,
+.btn.danger:active {
+  background: red;
+  color: white;
+}
+
 /* check out */
 .check-out {
   width: 100%;
