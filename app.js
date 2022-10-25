@@ -127,23 +127,23 @@ app.post("/accept-delete", acceptController.postDeleteTime);
 app.use(errorController.get404);
 app.get("/500", errorsController.get500);
 
-// app.use((error, req, res, next) => {
-//   res.status(500).render("500", {
-//     pageTitle: "Error!",
-//     path: "/500",
-//     user: req.session.user,
-//     isAuthenticated: req.session.isLoggedIn,
-//   });
-// });
+app.use((error, req, res, next) => {
+  res.status(500).render("500", {
+    pageTitle: "Error!",
+    path: "/500",
+    user: req.session.user,
+    isAuthenticated: req.session.isLoggedIn,
+  });
+});
 
 // Khởi tạo kết nối với mongoDB qua mongoose
 mongoose
   .connect(MONGODB_URI)
   .then((result) => {
-    // app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
-    //   console.log("Sever is running!!");
-    // });
-    app.listen(3000);
+    app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
+      console.log("Sever is running!!");
+    });
+    // app.listen(3000);
   })
   .catch((err) => {
     console.log(err);
