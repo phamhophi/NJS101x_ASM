@@ -10,7 +10,6 @@ const absentSchema = new Schema({
   date: {
     type: Date,
     required: true,
-    unique: true,
   },
   reason: {
     type: String,
