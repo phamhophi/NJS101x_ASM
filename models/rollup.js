@@ -21,9 +21,6 @@ const rollupSchema = new Schema({
 
 // Kiểm tra ký tự tìm kiếm
 rollupSchema.statics.checkSearch = function (first, second) {
-  console.log(first);
-  console.log(second);
-
   if (first.length == 0 && second.length == 0) return true;
 
   if (first.length > 1 && first[0] == "%" && second.length == 0) return false;

@@ -106,18 +106,23 @@ app.post("/edit-user", userController.postEditUser);
 app.get("/rollup", isAuth, rollupController.getRollup);
 app.post("/rollup", rollupController.postRollup);
 app.get("/rollup-detail", isAuth, rollupController.getRollupDetail);
+
 app.get("/covid", isAuth, covidController.getCovid);
 app.post("/covid", covidController.postCovid);
 app.get("/covid-detail", isAuth, covidController.getCovidDetail);
+
 app.get("/absent", isAuth, absentController.getAbsent);
 app.post("/absent", absentController.postAbsent);
 app.get("/absent-detail", isAuth, absentController.getAbsentDetail);
+
 app.get("/search", isAuth, userController.getSearch);
 app.get("/statistic-search", isAuth, userController.getStatisticSearch);
+
 app.get("/covid-detail/:userId", isAuth, employeeController.getEmployeeDetail);
 app.get("/covid/:userId", isAuth, covidController.getOutPDFCovid);
 app.get("/employee", isAuth, employeeController.getEmployee);
 app.get("/employee/:userId", isAuth, employeeController.getOutCovid);
+
 app.get("/accept", isAuth, acceptController.getAcceptTime);
 app.post("/accept-detail", acceptController.postAccept);
 app.get("/accept-detail/:userId", isAuth, acceptController.getAcceptDetail);
@@ -143,7 +148,6 @@ mongoose
     app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
       console.log("Sever is running!!");
     });
-    // app.listen(3000);
   })
   .catch((err) => {
     console.log(err);

@@ -56,10 +56,11 @@ exports.postLogin = (req, res, next) => {
         });
       }
       if (password === user.password) {
+        // Khỏi tạo giá trị
         req.session.isLoggedIn = true;
         req.session.user = user;
-        // Khỏi tạo giá trị
         req.session.accept = [];
+
         return req.session.save((err) => {
           console.log(err);
           res.redirect("/");
@@ -83,6 +84,7 @@ exports.postLogin = (req, res, next) => {
     });
 };
 
+// Tạo phương thức đăng xuất
 exports.postLogout = (req, res, next) => {
   req.session.destroy((err) => {
     console.log(err);

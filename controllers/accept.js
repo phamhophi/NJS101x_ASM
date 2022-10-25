@@ -1,3 +1,4 @@
+// Khai báo biến
 const User = require("../models/user");
 const Rollup = require("../models/rollup");
 const Absent = require("../models/absent");

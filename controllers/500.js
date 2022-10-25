@@ -1,4 +1,4 @@
-// Tạo phương thức render ra trang 500 khi có lỗi
+// Tạo phương thức render ra trang 500 khi có lỗi hệ thống
 exports.get500 = (req, res, next) => {
   res.status(500).render("500", {
     pageTitle: "Error",

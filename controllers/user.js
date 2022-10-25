@@ -2,8 +2,8 @@ const User = require("../models/user");
 const Status = require("../models/status");
 const Rollup = require("../models/rollup");
 
-// Tổng hiển thị trên 1 trang
-let perPage = 3;
+// Tổng hiển thị của 1 page
+let perPage = 20;
 
 // Tạo phương thức để render trang chủ
 exports.getHomepage = (req, res, next) => {
@@ -223,6 +223,8 @@ exports.getStatisticSearch = function (req, res, next) {
           }
         }
       }
+
+      // Biến lấy số lương phần tử mảng
       const totalItems = currStatistic.length;
       res.render("search", {
         pageTitle: "Tra cứu thông tin",
