@@ -171,7 +171,6 @@ exports.getStatisticSearch = function (req, res, next) {
   req.user
     .getSearchInform()
     .then((statistics) => {
-      console.log(statistics);
       let currStatistic = [],
         attendStatistic = [],
         absentStatistic = [];
