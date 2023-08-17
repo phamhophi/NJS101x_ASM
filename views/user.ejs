@@ -1,0 +1,30 @@
+<%- include('./includes/head.ejs') %>
+</head>
+
+<body>
+  <%- include('./includes/navigation.ejs') %>
+  <main>
+    <div class="main-user">
+      <div class="main-user__item">
+        <h1><%= user.name %></h1>
+        <p>ID: <%= user._id %></p>
+        <p>Ngày sinh: <%= user.doB.toLocaleDateString() %></p>
+        <p>Hệ số lương: <%= user.salaryScale %></p>
+        <!-- <% const startDate  = new Date(user.startDate) %> -->
+        <!-- <p>Ngày bắt đầu công việc:
+          <%= startDate.getDate() %>/<%= startDate.getMonth() %>/<%= startDate.getFullYear() %></p> -->
+        <p>Ngày bắt đầu công việc:
+          <%= user.startDate.toLocaleDateString()  %></p>
+        <p>Phòng ban: <%= user.department %></p>
+        <p>Ngày phép năm: <%= user.annualLeave %></p>
+      </div>
+      <div>
+        <div>
+          <img class="" width="25%" height="25%" src="<%= user.image %>" alt="<%= user.name %>" />
+        </div>
+        <br>
+        <a href="/edit-user/<%= user._id %>" class="btn">Chỉnh sửa thông tin</a>
+      </div>
+    </div>
+    </div>
+    <%- include('./includes/end.ejs') %>

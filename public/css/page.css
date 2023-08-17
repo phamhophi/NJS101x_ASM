@@ -1,0 +1,33 @@
+.main-page__item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.main-page__item {
+  margin: 0 0.5rem;
+  background-color: #339966;
+}
+
+.main-page__item a,
+.main-page__item button {
+  font: inherit;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+.main-page__item a:hover,
+.main-page__item a:active,
+.main-page__item a.active,
+.main-page__item button:hover,
+.main-page__item button:active {
+  color: #ffeb3b;
+}
+
+.disable-link {
+  pointer-events: none;
+}

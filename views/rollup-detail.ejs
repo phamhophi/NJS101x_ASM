@@ -1,0 +1,52 @@
+<%- include('./includes/head.ejs') %>
+<link rel="stylesheet" href="./css/form.css">
+</head>
+
+<body>
+  <%- include('./includes/navigation.ejs') %>
+  <main>
+    <div>
+      <h1 class="centered">Thông tin đăng ký làm việc</h1>
+      <br>
+      <h3><span>Ngày bắt đầu công việc: <%= attends.date %></span></h3>
+      <br>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Nơi làm việc</th>
+              <th>Giờ bắt đầu</th>
+              <th>Giờ kết thúc</th>
+              <th>Thời gian làm việc</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% attends.details.forEach(i=>{ %>
+            <tr>
+              <td><%= i.workplace %></td>
+              <td><%= i.startTime.toLocaleTimeString() %></td>
+              <% if(i.endTime){ %>
+              <td><%= i.endTime.toLocaleTimeString() %></td>
+              <td><%= ((i.endTime - i.startTime)/(3600 * 1000)).toFixed(2) %></td>
+              <% }else{ %>
+              <td>--</td>
+              <td>--</td>
+              <% } %>
+            </tr>
+            <% }) %>
+            <% if(attends.details[0].endTime){ %>
+            <tr>
+              <% const totalTime = attends.details.reduce((total, detail) => {return total + ((detail.endTime - detail.startTime))/(3600 *1000)},0) %>
+              <td><i>Tổng thời gian làm việc hôm nay:</i> <%= totalTime.toFixed(2) %> giờ</td>
+            </tr>
+            <% }else{ %>
+            <tr>
+              <td>Chưa kết thúc công việc</td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+  <%- include('./includes/end.ejs') %>

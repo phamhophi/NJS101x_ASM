@@ -1,0 +1,46 @@
+<%- include('./includes/head.ejs') %>
+<link rel="stylesheet" href="../css/form.css">
+</head>
+
+<body>
+  <%- include('./includes/navigation.ejs') %>
+  <main>
+    <form class="g-form" action="/edit-user" method="post">
+      <h1>Chỉnh sửa thông tin cá nhân</h1>
+      <div class="form-control">
+        <label for="name">Tên nhân viên</label>
+        <input type="text" id="name" name="name" value="<%= user.name %>" disabled>
+      </div>
+      <div class="form-control">
+        <label for="_id">ID</label>
+        <input type="text" name="_id" disabled value="<%= user._id %>">
+      </div>
+      <div class="form-control">
+        <label for="doB">Ngày Sinh</label>
+        <input type="text" id="doB" name="doB" value="<%= user.doB.toLocaleDateString() %>" disabled>
+      </div>
+      <div class=" form-control">
+        <label for="salaryScale">Hệ số lương</label>
+        <input type="text" id="salaryScale" name="salaryScale" value="<%= user.salaryScale %>" disabled>
+      </div>
+      <div class=" form-control">
+        <label for="startDate">Ngày bắt đầu công việc</label>
+        <input type="text" id="startDate" name="startDate" value="<%= user.startDate.toLocaleDateString() %>" disabled>
+      </div>
+      <div class="form-control">
+        <label for="department">Phòng ban</label>
+        <input type="text" id="department" name="department" value="<%= user.department %>" disabled>
+      </div>
+      <div class="form-control">
+        <label for="annualLeave">Ngày phép năm</label>
+        <input type="text" id="annualLeave" name="annualLeave" value="<%= user.annualLeave %>" disabled>
+      </div>
+      <div class="form-control">
+        <label for="image">Hình ảnh</label>
+        <input type="text" id="image" name="image" value="<%= user.image %>">
+      </div>
+      <input type="hidden" name="userId" value="<%= user._id %>">
+      <button class="btn" type="submit">Update User</button>
+    </form>
+  </main>
+  <%- include('./includes/end.ejs') %>

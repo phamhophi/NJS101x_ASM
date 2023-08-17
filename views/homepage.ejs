@@ -1,0 +1,43 @@
+<%- include('./includes/head.ejs') %>
+<link rel="stylesheet" href="../css/page.css">
+</head>
+
+<body>
+  <%- include('./includes/navigation.ejs') %>
+  <main>
+    <div class="main-user">
+      <div class="main-user__item">
+        <h1><%= user.name %></h1>
+        <img src="<%=user.image%>" width="25%" height="25%">
+      </div>
+      <div>
+        <% if(user.userPermission.includes("rollup")){ %>
+        <h3><span>Trạng Thái</span></h3>
+        <% if(!user.isWorking){ %>
+        <span>Không làm việc</span>
+        <% } else { %>
+        <div>
+          <span>Đang làm việc</span>
+        </div>
+        <% } %>
+      </div>
+      <div>
+        <h3><span>Nơi làm việc</span></h3>
+        <span><%= user.workplace %></span>
+      </div>
+      <% } %>
+    </div>
+    <br>
+    <div class="grid">
+      <ul class="main-page__item-list">
+        <% if(!user.isWorking){ %>
+        <% if(user.userPermission.includes("rollup")){ %>
+        <li class="btn main-page__item"><a href="/rollup">Điểm Danh</a></li>
+        <% } %>
+        <% }else{ %>
+        <li class="btn main-page__item"><a href="/rollup?type=end">Kết thúc làm</a></li>
+        <% } %>
+      </ul>
+    </div>
+  </main>
+  <%- include('./includes/end.ejs') %>

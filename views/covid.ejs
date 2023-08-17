@@ -1,0 +1,59 @@
+<%- include('./includes/head.ejs') %>
+<link rel="stylesheet" href="./css/form.css">
+</head>
+
+<body>
+  <%- include('./includes/navigation.ejs') %>
+  <main>
+    <h1 class="centered">Thông tin covid cá nhân</h1>
+    <h3 class="centered link-a">
+      <a class="btn" href="/covid-detail">Thông tin đăng ký</a>
+      <% if(user.userPermission.includes("view_employee")){ %>
+      <a class="btn" href="/employee">Nhân viên</a>
+      <a class="btn" href="/covid/<%= user._id %>?name=<%= user.name %>" target="_blank">PDF</a>
+      <% } %>
+    </h3>
+    <div class="g-form">
+      <form action="/covid?type=temperature" method="post">
+        <h3>Thông tin thân nhiệt</h3>
+        <div class="form-control">
+          <label for="temperature">Nhiệt độ cơ thể</label>
+          <input required type="number" id="temperature" name="temperature" step="0.01"
+            placeholder="Nhập nhiệt độ cơ thể" />
+        </div>
+
+        <button type="submit" class="btn">Đăng ký</button>
+        <hr>
+      </form>
+    </div>
+    <div class="g-form">
+      <form action="/covid?type=vaccine" method="post">
+        <h3>Thông tin tiêm vaccine</h3>
+        <div class="form-control">
+          <h4>Mũi tiêm <%= vaccine.length + 1 %> </h4>
+          <label for="vaccineDate">Ngày tiêm Vaccine</label>
+          <input required type="date" id="vaccineDate" name="vaccineDate">
+        </div>
+        <div class="form-control">
+          <label for="vaccineName">Tên Vaccine</label>
+          <input required type="text" id="vaccineName" name="vaccineName" placeholder="Tên vaccine">
+        </div>
+
+        <button type="submit" class="btn">Đăng ký</button>
+        <hr>
+      </form>
+    </div>
+
+    <div class="g-form">
+      <form action="/covid?type=positive" method="post">
+        <h3>Thông tin dương tính covid</h3>
+        <div class="form-control">
+          <label for="positive">Ngày phát hiện dương tính</label>
+          <input required type="date" id="positive" name="positive" placeholder="Ngày dương tính">
+        </div>
+
+        <button type="submit" class="btn">Đăng ký</button>
+      </form>
+    </div>
+  </main>
+  <%- include('./includes/end.ejs') %>

@@ -1,0 +1,37 @@
+<%- include('./includes/head.ejs') %>
+</head>
+
+<body>
+  <%- include('./includes/navigation.ejs') %>
+  <main>
+    <div>
+      <h1 class="centered">Danh sách nhân viên đang quản lý</h1>
+      <div class="grid">
+        <table>
+          <thead>
+            <tr>
+              <th>Họ tên</th>
+              <th>Ngày sinh</th>
+              <th>Phòng ban</th>
+              <th>Ngày làm việc</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let user of userEmployee){ %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.doB.toLocaleDateString() %></td>
+              <td><%= user.department %></td>
+              <td><%= user.startDate.toLocaleDateString() %></td>
+              <td>
+                <a class="btn" href="/covid-detail/<%= user._id %>">Xem</a>
+                <a class="btn" href="/employee/<%= user._id %>?name=<%= user.name %>" target="_blank">PDF</a>
+              </td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+  <%- include('./includes/end.ejs') %>

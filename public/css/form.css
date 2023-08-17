@@ -1,0 +1,57 @@
+.g-form {
+  width: 20rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+}
+
+.apt-form {
+  width: 13rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+}
+
+.form-control {
+  margin: 1rem 0;
+}
+
+.form-control label {
+  font-weight: bolder;
+}
+
+.form-control label,
+.form-control input,
+.form-control select,
+.form-control textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+
+.form-control input,
+.form-control select,
+.form-control textarea {
+  border: 1px solid #a1a1a1;
+  font: inherit;
+  border-radius: 2px;
+}
+
+.form-control input:focus,
+.form-control textarea:focus {
+  outline-color: #339966;
+}
+
+.form-control input.invalid,
+.form-control textarea.invalid {
+  border-color: red;
+}
+
+.btn-disable {
+  cursor: not-allowed;
+  pointer-events: none;
+
+  /*Button disabled - CSS color class*/
+  color: #c0c0c0;
+  background-color: #c0c0c0;
+}
